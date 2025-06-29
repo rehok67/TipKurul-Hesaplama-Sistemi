@@ -2,14 +2,14 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, getDocs, orderBy, query } from 'firebase/firestore';
 
-// Firebase yapılandırması - Environment Variables ile güvenli
+// Firebase yapılandırması - Environment Variables ile güvenli (fallback ile)
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDAg-TMMG6406skyS_QokYwRQm0FkQeRDA",
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "tipnot-f6e84.firebaseapp.com", 
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "tipnot-f6e84",
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "tipnot-f6e84.firebasestorage.app",
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "423068240136",
+    appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:423068240136:web:20625ae6b8d335f75f84bd"
 };
 
 // Firebase'i başlat
@@ -17,6 +17,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 console.log('🔥 Firebase bağlantısı kuruldu (NPM)!');
+console.log('🔧 Firebase Config:', firebaseConfig);
+console.log('📋 Database instance:', db);
 
 // Global değişkenler
 let currentSystem = 'ikcu';
