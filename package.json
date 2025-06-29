@@ -1,0 +1,22 @@
+{
+  "name": "proje2",
+  "version": "1.0.0",
+  "description": "Excel'deki tıp fakültesi dönem not hesaplama sistemini web tabanlı bir uygulamaya dönüştürülmüş modern ve kullanıcı dostu bir araçtır.",
+  "main": "script.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "firebase": "^11.9.1"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}

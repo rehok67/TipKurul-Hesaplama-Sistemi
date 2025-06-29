@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "tipnot-f6e84"
+  },
+  "targets": {
+    "tipnot-f6e84": {
+      "hosting": {
+        "main": [
+          "tipkurul-hesaplama"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

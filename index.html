@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tıp Not Hesaplama | İKÇÜ Dönem Sistemi</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Tıp fakültesi dönem notu hesaplama sistemi. İKÇÜ Sistem 1, finalsiz dönem, kur katsayıları. Ücretsiz online hesaplama aracı.">
+    <meta name="keywords" content="tıp fakültesi, not hesaplama, İKÇÜ, dönem notu, kur katsayısı, finalsiz dönem, tıp not sistemi, online hesaplama, ücretsiz">
+    <meta name="author" content="TipKurul Hesaplama">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tipkurul-hesaplama.web.app/">
+    <meta property="og:title" content="Tıp Not Hesaplama | İKÇÜ Sistemi">
+    <meta property="og:description" content="Tıp fakültesi dönem notu hesaplama sistemi. İKÇÜ Sistem 1, finalsiz dönem, kur katsayıları.">
+    <meta property="og:image" content="https://tipkurul-hesaplama.web.app/preview.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tipkurul-hesaplama.web.app/">
+    <meta property="twitter:title" content="Tıp Not Hesaplama | İKÇÜ Sistemi">
+    <meta property="twitter:description" content="Tıp fakültesi dönem notu hesaplama sistemi. İKÇÜ Sistem 1, finalsiz dönem desteği.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://tipkurul-hesaplama.web.app/">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Tıp Not Hesaplama Sistemi",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "url": "https://tipkurul-hesaplama.web.app/",
+        "description": "Tıp fakültesi öğrencileri için dönem notu hesaplama sistemi. İKÇÜ Sistem 1 desteği, finalsiz dönem hesaplama.",
+        "author": {
+            "@type": "Organization",
+            "name": "TipKurul Hesaplama"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "TRY"
+        },
+        "keywords": ["tıp fakültesi", "not hesaplama", "İKÇÜ", "dönem notu", "kur katsayısı"],
+        "inLanguage": "tr"
+    }
+    </script>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Vite ile script yükleme -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 Tıp Fakültesi Not Hesaplama Sistemi</h1>
+            <p>Kur katsayılarını girerek dönem notunuzu hesaplayın</p>
+        </header>
+
+        <div class="main-content">
+            <div class="system-selection">
+                <h3>🏥 Sistem Seçimi</h3>
+                <div class="system-buttons" id="systemButtons">
+                    <button class="system-btn active" onclick="selectSystem('ikcu')" id="ikcuBtn">
+                        📋 İKÇÜ Sistemi (Sistem 1)
+                    </button>
+                    <button class="system-btn" onclick="selectSystem('custom')" id="customBtn">
+                        ⚙️ Özel Sistem Oluştur
+                    </button>
+                    <!-- Kaydedilen sistemler buraya dinamik olarak eklenecek -->
+                </div>
+                
+                <!-- Sistem Oluşturma Paneli -->
+                <div class="create-system-panel" id="createSystemPanel" style="display: none;">
+                    <h4>🎯 Yeni Sistem Oluştur</h4>
+                    <div class="create-system-form">
+                        <div class="input-group">
+                            <label for="systemName">Sistem Adı:</label>
+                            <input type="text" id="systemName" placeholder="Örn: Ankara Tıp Sistemi" maxlength="50">
+                        </div>
+                        <div class="input-group">
+                            <label for="universityName">Üniversite Adı:</label>
+                            <input type="text" id="universityName" placeholder="Örn: Ankara Üniversitesi" maxlength="50">
+                        </div>
+                        <div class="input-group">
+                            <label for="creatorName">Oluşturan:</label>
+                            <input type="text" id="creatorName" placeholder="Adınız (isteğe bağlı)" maxlength="30">
+                        </div>
+                        
+                        <div class="system-settings-grid">
+                            <div class="input-group">
+                                <label for="normalGecmeNotu">Normal Geçme Notu:</label>
+                                <input type="number" id="normalGecmeNotu" min="0" max="100" step="0.1" value="60">
+                            </div>
+                            <div class="input-group">
+                                <label for="finalsizGecmeNotu">Finalsiz Geçme Notu:</label>
+                                <input type="number" id="finalsizGecmeNotu" min="0" max="100" step="0.1" value="85">
+                            </div>
+                            <div class="input-group">
+                                <label for="minFinalNot">Minimum Final Notu:</label>
+                                <input type="number" id="minFinalNot" min="0" max="100" step="0.1" value="60">
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="hasFixedCourses">
+                            <label for="hasFixedCourses">Sabit dersler var (ITS, TMB gibi)</label>
+                        </div>
+                        
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="hasHarfNotu">
+                            <label for="hasHarfNotu">Harf notu sistemi var</label>
+                        </div>
+                        
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="hasShartliGecme">
+                            <label for="hasShartliGecme">Şartlı geçme sistemi var</label>
+                        </div>
+
+                        <!-- Template Kurlar Bölümü -->
+                        <div class="template-courses-section">
+                            <h4>📚 Template Kurlar (Bu dönem/fakülte için tipik dersler)</h4>
+                            <p class="template-explanation">Bu sistemi seçenler bu kurslarla başlayacak, sonrasında ihtiyaçlarına göre ekleyip çıkarabilirler.</p>
+                            
+                            <div class="template-course-types">
+                                <div class="template-type-section">
+                                    <h5>🎯 Temel Kurlar</h5>
+                                    <div id="templateBasicCourses" class="template-courses-container">
+                                        <!-- Dinamik olarak eklenecek -->
+                                    </div>
+                                    <button type="button" class="add-template-btn" onclick="addTemplateCourse('basic')">➕ Temel Kur Ekle</button>
+                                </div>
+                                
+                                <div class="template-type-section">
+                                    <h5>📋 Sabit Dersler</h5>
+                                    <div id="templateFixedCourses" class="template-courses-container">
+                                        <!-- Dinamik olarak eklenecek -->
+                                    </div>
+                                    <button type="button" class="add-template-btn" onclick="addTemplateCourse('fixed')">➕ Sabit Ders Ekle</button>
+                                </div>
+                                
+                                <div class="template-type-section">
+                                    <h5>🎓 Final Dersi</h5>
+                                    <div class="template-final-option">
+                                        <label class="checkbox-container">
+                                            <input type="checkbox" id="templateHasFinal" checked onchange="toggleTemplateFinal()">
+                                            <span>Final sınavı var</span>
+                                        </label>
+                                        <div class="template-final-weight" id="templateFinalWeightContainer">
+                                            <label for="templateFinalWeight">Final Katsayısı (%):</label>
+                                            <input type="number" id="templateFinalWeight" min="0" max="100" step="0.00001" value="20" placeholder="Final katsayısı">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="create-system-buttons">
+                            <button class="btn btn-primary" onclick="saveCustomSystem()">💾 Sistemi Kaydet</button>
+                            <button class="btn btn-secondary" onclick="cancelSystemCreation()">❌ İptal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-panel">
+                <h3>⚙️ Ayarlar</h3>
+                <div class="settings-row">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="finalsizDonem" onchange="toggleFinalOrani()">
+                        <label for="finalsizDonem">Finalsiz Dönem</label>
+                    </div>
+                    <div class="custom-settings" id="customSettings">
+                        <div class="input-group-small">
+                            <label for="gecmeNotu">Geçme Notu:</label>
+                            <input type="number" id="gecmeNotu" min="0" max="100" step="0.1" value="59.5" oninput="updateSettings()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calculator-panel">
+                <h3>📊 Kur Katsayıları</h3>
+                
+                <div id="kurContainer">
+                    <div class="input-group kur-group" data-kur="1">
+                        <label for="kur1">1. Kur Katsayısı (%)</label>
+                        <input type="number" id="kur1" min="0" max="100" step="0.00001" value="10" oninput="updateKatsayilar()">
+                    </div>
+                    <div class="input-group kur-group" data-kur="2">
+                        <label for="kur2">2. Kur Katsayısı (%)</label>
+                        <input type="number" id="kur2" min="0" max="100" step="0.00001" value="10" oninput="updateKatsayilar()">
+                    </div>
+                    <div class="input-group kur-group" data-kur="3">
+                        <label for="kur3">3. Kur Katsayısı (%)</label>
+                        <input type="number" id="kur3" min="0" max="100" step="0.00001" value="10" oninput="updateKatsayilar()">
+                    </div>
+                    <div class="input-group kur-group" data-kur="4">
+                        <label for="kur4">4. Kur Katsayısı (%)</label>
+                        <input type="number" id="kur4" min="0" max="100" step="0.00001" value="10" oninput="updateKatsayilar()">
+                    </div>
+                    <div class="input-group kur-group" data-kur="5">
+                        <label for="kur5">5. Kur Katsayısı (%)</label>
+                        <input type="number" id="kur5" min="0" max="100" step="0.00001" value="10" oninput="updateKatsayilar()">
+                    </div>
+                </div>
+
+                <div class="fixed-courses" id="fixedCourses">
+                    <h4>📚 Sabit Dersler (İKÇÜ)</h4>
+                    <div class="input-group kur-group" id="itsGroup">
+                        <label for="its">ITS Katsayısı (%)</label>
+                        <input type="number" id="its" min="0" max="100" step="0.00001" value="15" oninput="updateKatsayilar()">
+                    </div>
+                    <div class="input-group kur-group" id="tmbGroup">
+                        <label for="tmb">TMB Katsayısı (%)</label>
+                        <input type="number" id="tmb" min="0" max="100" step="0.00001" value="15" oninput="updateKatsayilar()">
+                    </div>
+                    <div class="input-group kur-group" id="finalGroup">
+                        <label for="final">Final Katsayısı (%)</label>
+                        <input type="number" id="final" min="0" max="100" step="0.00001" value="20" oninput="updateKatsayilar()">
+                    </div>
+                </div>
+
+                <div class="extra-courses" id="extraCourses">
+                    <h4>📚 Ek Dersler</h4>
+                    <div id="extraCoursesContainer">
+                        <!-- Dinamik olarak eklenecek -->
+                    </div>
+                    <button class="add-course-btn" onclick="addExtraCourse()">➕ Ek Ders Ekle</button>
+                </div>
+
+                <div class="toplam-container">
+                    <strong>Toplam Katsayı: <span id="toplamKatsayi">100</span>%</strong>
+                </div>
+            </div>
+
+            <div class="notes-panel">
+                <h3>📝 Notlar</h3>
+                
+                <div id="kurNotlariContainer">
+                    <div class="input-group">
+                        <label for="kurNot1">1. Kur Notu</label>
+                        <input type="number" id="kurNot1" min="0" max="100" step="0.1" oninput="hesapla()">
+                    </div>
+                    <div class="input-group">
+                        <label for="kurNot2">2. Kur Notu</label>
+                        <input type="number" id="kurNot2" min="0" max="100" step="0.1" oninput="hesapla()">
+                    </div>
+                    <div class="input-group">
+                        <label for="kurNot3">3. Kur Notu</label>
+                        <input type="number" id="kurNot3" min="0" max="100" step="0.1" oninput="hesapla()">
+                    </div>
+                    <div class="input-group">
+                        <label for="kurNot4">4. Kur Notu</label>
+                        <input type="number" id="kurNot4" min="0" max="100" step="0.1" oninput="hesapla()">
+                    </div>
+                    <div class="input-group">
+                        <label for="kurNot5">5. Kur Notu</label>
+                        <input type="number" id="kurNot5" min="0" max="100" step="0.1" oninput="hesapla()">
+                    </div>
+                </div>
+
+                <div id="fixedNotlariContainer">
+                    <div class="input-group">
+                        <label for="itsNot">ITS Notu</label>
+                        <input type="number" id="itsNot" min="0" max="100" step="0.1" oninput="hesapla()">
+                    </div>
+                    <div class="input-group">
+                        <label for="tmbNot">TMB Notu</label>
+                        <input type="number" id="tmbNot" min="0" max="100" step="0.1" oninput="hesapla()">
+                    </div>
+                    <div class="input-group" id="finalNotGroup">
+                        <label for="finalNot">Final Notu</label>
+                        <input type="number" id="finalNot" min="0" max="100" step="0.1" oninput="hesapla()">
+                    </div>
+                </div>
+
+                <div id="extraNotlariContainer">
+                    <!-- Dinamik olarak eklenecek -->
+                </div>
+            </div>
+
+            <div class="result-panel">
+                <h3>🎯 Sonuç</h3>
+                <div class="result-display">
+                    <div class="result-item">
+                        <span class="result-label">Dönem Notu:</span>
+                        <span class="result-value" id="donemNotu">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Harf Notu:</span>
+                        <span class="result-value" id="harfNotu">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Durum:</span>
+                        <span class="result-value" id="durum">-</span>
+                    </div>
+                </div>
+
+                <div class="calculation-details" id="hesaplamaDetay">
+                    <h4>Hesaplama Detayı:</h4>
+                    <div id="detayIcerik"></div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button onclick="temizle()" class="btn btn-secondary">🗑️ Temizle</button>
+                <button onclick="ornekDoldur()" class="btn btn-primary">📋 Örnek Doldur</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Tıp Fakültesi Not Hesaplama Sistemi | İKÇÜ Sistemi v2.0</p>
+        </footer>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html> 
