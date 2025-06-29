@@ -171,17 +171,6 @@ Bu proje MIT lisansı altında yayınlanmıştır. Detaylar için [LICENSE](LICE
 ## 📞 İletişim
 
 - **Website**: https://tipkurul-hesaplama.web.app
-- **Issues**: [GitHub Issues](https://github.com/[username]/tip-hesaplama-sistemi/issues)
-- **Email**: [email@domain.com]
+- **Issues**: [GitHub Issues](https://github.com/[rehok67]/tip-hesaplama-sistemi/issues)
 
-## 🙏 Teşekkürler
-
-- Firebase ekibine hosting ve database için
-- Vite.js ekibine hızlı build tool için  
-- Tıp fakültesi öğrencilerine feedback için
-
----
-
-⭐ **Bu proje faydalıysa star vermeyi unutma!**
-
-📚 **Tıp fakültesi arkadaşlarınla paylaş!** 
+ 
